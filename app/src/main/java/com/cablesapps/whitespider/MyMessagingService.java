@@ -30,7 +30,7 @@ public class MyMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "MyFirebaseIIDService";
     NotificationManager notificationManager;
-
+//https://www.pluralsight.com/guides/push-notifications-with-firebase-cloud-messaging
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         //super.onMessageReceived(remoteMessage);
