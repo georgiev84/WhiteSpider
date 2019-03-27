@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "113151279193",
+    "firebase_url": "https://whitespider-c2711.firebaseio.com",
+    "project_id": "whitespider-c2711",
+    "storage_bucket": "whitespider-c2711.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:113151279193:android:c353483adfba27aa",
+        "android_client_info": {
+          "package_name": "com.cablesapps.whitespider"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "113151279193-m2savhh6op232n7likbbkmtst1ni4skp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cablesapps.whitespider",
+            "certificate_hash": "b8509f32285d80c9cb2117f54d221018c7bad829"
+          }
+        },
+        {
+          "client_id": "113151279193-c18oindk5tsmbshmm5frhjlehne0adqd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdHWiO7F5RZOsONNEGacRUvc0iB4xivvI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "113151279193-c18oindk5tsmbshmm5frhjlehne0adqd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
