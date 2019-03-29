@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "113151279193-u8uc7q1akbdcpb1cg35u31jprdd994je.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cablesapps.whitespider",
+            "certificate_hash": "6d32432ba3a4810a4560c4daa0e6113939fd95ac"
+          }
+        },
+        {
           "client_id": "113151279193-c18oindk5tsmbshmm5frhjlehne0adqd.apps.googleusercontent.com",
           "client_type": 3
         }
