@@ -3,6 +3,7 @@ package com.cablesapps.whitespider;
 public class Note {
     private String title;
     private String description;
+    private String image;
     private int priority;
 
     public Note(){
@@ -26,5 +27,9 @@ public class Note {
 
     public int getPriority() {
         return priority;
+    }
+
+    public String getImage(){
+        return image;
     }
 }

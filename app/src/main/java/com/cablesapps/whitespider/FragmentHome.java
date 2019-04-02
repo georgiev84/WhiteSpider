@@ -131,7 +131,7 @@ public class FragmentHome  extends Fragment {
                 .setQuery(query, Note.class)
                 .build();
 
-        adapter = new NoteAdapter(options);
+        adapter = new NoteAdapter(options, getContext());
 
         RecyclerView recyclerView = v.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
