@@ -6,6 +6,7 @@ public class Note {
     private String image;
     private int priority;
 
+
     public Note(){
         // empty constructor needed for firebase
     }
