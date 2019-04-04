@@ -35,6 +35,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
+import java.util.Random;
 
 public class NewNoteFragment extends Fragment {
 
@@ -44,6 +45,7 @@ public class NewNoteFragment extends Fragment {
     private Button saveButton;
     private Button browseImageButton;
     Uri currImageURI;
+    String imageStoragePath;
 
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference();
@@ -103,11 +105,16 @@ public class NewNoteFragment extends Fragment {
 
     private void uploadImage(){
 
+        final int min = 1;
+        final int max = 1000;
+        final int random = new Random().nextInt((max - min) + 1) + min;
+
         Uri file = currImageURI;
-        final StorageReference riversRef = storageRef.child("images/" + file.getLastPathSegment());
+        final StorageReference riversRef = storageRef.child("images/"+ random + file.getLastPathSegment());
 
         uploadTask = riversRef.putFile(file);
 
+        imageStoragePath = "images/" + random + file.getLastPathSegment();
 
         Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
             @Override
@@ -142,14 +149,14 @@ public class NewNoteFragment extends Fragment {
         String title = editTextTitle.getText().toString();
         String description = editTextDescription.getText().toString();
         int priority = numberPickerPriority.getValue();
-        kzl = kzl;
+
         if(title.trim().isEmpty() || description.trim().isEmpty() ){
             Toast.makeText(getContext(), "Please insert a title and description", Toast.LENGTH_SHORT).show();
             return;
         }
 
         CollectionReference newsRef = FirebaseFirestore.getInstance().collection("News");
-        newsRef.add(new Note(title, description, priority, kzl));
+        newsRef.add(new Note(title, description, priority, kzl, imageStoragePath));
         Toast.makeText(getContext(), "Note added", Toast.LENGTH_SHORT).show();
 
 

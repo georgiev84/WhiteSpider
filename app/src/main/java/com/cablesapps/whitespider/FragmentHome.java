@@ -97,6 +97,7 @@ public class FragmentHome  extends Fragment{
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
                 adapter.deleteItem(viewHolder.getAdapterPosition());
+                adapter.deleteTestImage(viewHolder.getAdapterPosition());
             }
         }).attachToRecyclerView(recyclerView);
 
@@ -114,68 +115,6 @@ public class FragmentHome  extends Fragment{
         adapter.stopListening();
     }
 
-
 }
 
-//        imageFront = view.findViewById(R.id.imageFront);
-//
-//
-//        StorageReference storageRef = storage.getReference();
-//
-//
-//        // Create a new user with a first and last name
-//        Map<String, Object> news = new HashMap<>();
-//        news.put("picture", "1");
-//        news.put("title", "Концерт");
-//        news.put("content", "Начало 21:00h. Нова група алабала... нещо си");
-//
-//
-//        // Add a new document with a generated ID
-//        db.collection("news")
-//                .add(news)
-//                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                    @Override
-//                    public void onSuccess(DocumentReference documentReference) {
-//                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.w(TAG, "Error adding document", e);
-//                    }
-//                });
 
-
-//        storageRef.child("beiko.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//            @Override
-//            public void onSuccess(Uri uri) {
-//                // Got the download URL for 'users/me/profile.png'
-//                Log.d(TAG, "SuccessLoadingBeiko");
-//
-//               // beiko = "https://firebasestorage.googleapis.com/v0/b/whitespider-c2711.appspot.com/o/beiko.jpg?alt=media&token=5c69a686-f932-4d56-b84e-9647c622a8b4";
-//                Picasso.with(getContext()).load(uri).fit().centerCrop().into(imageFront);
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception exception) {
-//                // Handle any errors
-//                Log.d(TAG, "ERRORLoadingBeiko");
-//            }
-//        });
-
-
-//        db.collection("news")
-//                .get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()) {
-//                            for (QueryDocumentSnapshot document : task.getResult()) {
-//                                Log.d(TAG, document.getId() + " => " + document.getData());
-//                            }
-//                        } else {
-//                            Log.d(TAG, "Error getting documents: ", task.getException());
-//                        }
-//                    }
-//                });

@@ -12,19 +12,29 @@ import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 public class NoteAdapter extends FirestoreRecyclerAdapter<Note, NoteAdapter.NoteHolder> {
 
     private Context context;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private String TAG = "adapter delete: ";
-    CollectionReference newsRef = db.collection("News");
+    private FirebaseStorage mStorage;
+
+    private String TAG = "Adapter: ";
+   // CollectionReference newsRef = db.collection("News");
 
     public NoteAdapter(@NonNull FirestoreRecyclerOptions<Note> options, Context context) {
         super(options);
@@ -40,6 +50,8 @@ public class NoteAdapter extends FirestoreRecyclerAdapter<Note, NoteAdapter.Note
             Picasso.with(context).load(model.getImage()).fit().centerCrop().into(holder.imageView);
         }
 
+
+
     }
 
     @NonNull
@@ -52,27 +64,65 @@ public class NoteAdapter extends FirestoreRecyclerAdapter<Note, NoteAdapter.Note
 
     public void deleteItem(int position){
         getSnapshots().getSnapshot(position).getReference().delete();
+        // Query capitalCities = db.collection("News").whereEqualTo("priority", 1);
+//        DocumentSnapshot r = getSnapshots().getSnapshot(position);
+//        String kzl = r.getString("imageStoragePath");
+//
+//
+//        FirebaseStorage storage = FirebaseStorage.getInstance();
+//        // Create a storage reference from our app
+//        StorageReference storageRef = storage.getReference();
+//
+//        // Create a reference to the file to delete
+//        StorageReference desertRef = storageRef.child(kzl);
+//
+//
+//        // Delete the file
+//        desertRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+//            @Override
+//            public void onSuccess(Void aVoid) {
+//                // File deleted successfully
+//                Log.d(TAG, "Deleted");
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception exception) {
+//                // Uh-oh, an error occurred!
+//                Log.d(TAG, "ERROR DELETING");
+//            }
+//        });
     }
 
     public void deleteTestImage(int position){
-        getSnapshots().getSnapshot(position).getReference().equals(Note.class);
 
-        Query query = newsRef.whereEqualTo("image", "CA");
+//       // Query capitalCities = db.collection("News").whereEqualTo("priority", 1);
+        DocumentSnapshot r = getSnapshots().getSnapshot(position);
+        String kzl = r.getString("imageStoragePath");
 
-        db.collection("News").document("DC")
-                .delete()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error deleting document", e);
-                    }
-                });
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        // Create a storage reference from our app
+        StorageReference storageRef = storage.getReference();
+
+        // Create a reference to the file to delete
+        StorageReference desertRef = storageRef.child(kzl);
+
+
+        // Delete the file
+        desertRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                // File deleted successfully
+                Log.d(TAG, "Deleted");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Uh-oh, an error occurred!
+                Log.d(TAG, "ERROR DELETING");
+            }
+        });
+
     }
 
 
