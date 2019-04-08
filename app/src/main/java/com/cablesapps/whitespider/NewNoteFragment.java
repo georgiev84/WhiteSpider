@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.Continuation;
@@ -51,11 +52,17 @@ public class NewNoteFragment extends Fragment {
     StorageReference storageRef = storage.getReference();
     StorageReference mountainsRef = storageRef.child("mountains.jpg");
     UploadTask uploadTask;
+    ProgressBar mProgressBar;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_new_note, container, false);
+
+        mProgressBar = view.findViewById(R.id.progress_circular);
+        mProgressBar.setVisibility(View.GONE);
+
 
         editTextTitle = view.findViewById(R.id.edit_text_title);
         editTextDescription = view.findViewById(R.id.edit_text_description);
@@ -69,13 +76,18 @@ public class NewNoteFragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 uploadImage();
             }
         });
 
+
         browseImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -109,12 +121,18 @@ public class NewNoteFragment extends Fragment {
         final int max = 1000;
         final int random = new Random().nextInt((max - min) + 1) + min;
 
+        if(currImageURI == null){
+            Toast.makeText(getContext(), "Please choose picture", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         Uri file = currImageURI;
         final StorageReference riversRef = storageRef.child("images/"+ random + file.getLastPathSegment());
 
         uploadTask = riversRef.putFile(file);
 
         imageStoragePath = "images/" + random + file.getLastPathSegment();
+        mProgressBar.setVisibility(View.VISIBLE);
 
         Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
             @Override
@@ -146,6 +164,8 @@ public class NewNoteFragment extends Fragment {
     }
 
     private void saveNote(String kzl){
+
+
         String title = editTextTitle.getText().toString();
         String description = editTextDescription.getText().toString();
         int priority = numberPickerPriority.getValue();
@@ -159,6 +179,7 @@ public class NewNoteFragment extends Fragment {
         newsRef.add(new Note(title, description, priority, kzl, imageStoragePath));
         Toast.makeText(getContext(), "Note added", Toast.LENGTH_SHORT).show();
 
+        getActivity().onBackPressed();
 
     }
 

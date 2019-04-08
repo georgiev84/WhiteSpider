@@ -77,6 +77,7 @@ public class FragmentHome  extends Fragment{
     private void setUpRecyclerView(View v){
         Query query = newsRef.orderBy("priority", Query.Direction.DESCENDING);
 
+
         FirestoreRecyclerOptions<Note> options = new FirestoreRecyclerOptions.Builder<Note>()
                 .setQuery(query, Note.class)
                 .build();
